@@ -1,19 +1,24 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Route, withRouter, Switch } from "react-router-dom";
+
 import * as actions from "../../store/actions/index";
 
-import Modal from "../../components/UI/Modal/Modal";
 import Spinner from "../../components/UI/Spinner/Spinner";
-import classes from "Marvelopedia.module.css";
+import classes from "./Marvelopedia.module.css";
 
 class Marvelopedia extends Component {
+	constructor(props) {
+		super(props);
+		this.state = { modalShow: true };
+	}
 	componentDidMount() {
-		this.props.fetchProducts();
+		this.props.fetchCharacters();
 	}
 	render() {
 		return (
 			<React.Fragment>
+				<p>Hello</p>
 				<ul className={classes.cartList}>
 					{this.props.charactersList.map((character) => (
 						<li key={character.id}>
@@ -34,24 +39,16 @@ class Marvelopedia extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		loading: state.loadTraininglog.loading,
-		error: state.loadTraininglog.error,
-		userId: state.auth.userId,
-		month: state.date.month,
-		trainings: state.loadTraininglog.trainings,
+		charactersList: state.characters.characters,
+		loading: state.characters.loading,
+		error: state.characters.error,
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
-	return {
-		traininglogData: (trainingLog, userId) =>
-			dispatch(actions.loadTraininglog(trainingLog, userId)),
-		nextMonth: (month) => dispatch(actions.nextMonth(month)),
-		prevMonth: (month) => dispatch(actions.prevMonth(month)),
-		onDayClick: (day) => dispatch(actions.onDateClick(day)),
-	};
+	return { fetchCharacters: () => dispatch(actions.fetchCharacters()) };
 };
 
 export default withRouter(
-	connect(mapStateToprops, mapDispatchToprops)(Marvelopedia)
+	connect(mapStateToProps, mapDispatchToProps)(Marvelopedia)
 );

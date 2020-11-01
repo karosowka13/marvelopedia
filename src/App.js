@@ -1,36 +1,45 @@
-import { Route, Switch, Redirect } from "react-router-dom";
 import React, { Component } from "react";
+import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 
 import Layout from "./hoc/Layout/Layout";
 //import Auth from "./containers/Auth/Auth";
 //import Logout from "./containers/Auth/Logout/Logout";
-import Card from "./components/Card/Card";
+import Cart from "./components/Cart/Cart";
 import Marvelopedia from "./containers/Marvelopedia/Marvelopedia";
 import SavedCards from "./containers/SavedCards/SavedCards";
 
 class App extends Component {
+	constructor(props) {
+		super(props);
+		this.state = { isAuthenticated: false };
+	}
 	render() {
-		const isAuthenticated = false;
 		let routes = (
 			<Switch>
 				{/* <Route path="/auth" component={Auth} /> */}
-				<Route path="/card:id" component={Card} />
-				<Route path="/" exact component={Marvelopedia} />
+				<Route path="/:name" component={Cart} />
+				<Route path="/" exact>
+					<Marvelopedia />
+				</Route>
 				<Redirect to="/" />
 			</Switch>
 		);
-		if (isAuthenticated) {
+		if (this.props.isAuthenticated) {
 			routes = (
 				<Switch>
 					<Route path="/favorite" component={SavedCards} />
 					{/* <Route path="/logout" component={Logout} /> */}
-					<Route path="/card:id" component={Card} />
-					<Route path="/" exact component={Marvelopedia} />
+					<Route path="/:name" component={Cart} />
+					<Route path="/" component={Marvelopedia} exact />
 					<Redirect to="/" />
 				</Switch>
 			);
 		}
-		return <Layout>{routes}</Layout>;
+		return (
+			<div>
+				<Layout>{routes}</Layout>
+			</div>
+		);
 	}
 }
-export default App;
+export default withRouter(App);

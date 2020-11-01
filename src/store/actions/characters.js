@@ -24,15 +24,23 @@ export const fetchCharactersStart = () => {
 export const fetchCharacters = () => {
 	return (dispatch) => {
 		dispatch(fetchCharactersStart());
-		const queryParams = "?apikey=" + process.env.REACT_API_PUBLIC_KEY;
+		const queryParams = "?apikey=" + process.env.REACT_APP_API_PUBLIC_KEY;
 		axios
 			.get("https://gateway.marvel.com/v1/public/characters" + queryParams)
 			.then((res) => {
 				const fetchedCharacters = [];
-				for (let key in res.data) {
+				const results = res.data.data.results;
+				for (let i in results) {
+					let comics = [];
+					for (let n = 0; n < results[i].comics.items.length; n++) {
+						comics.push(results[i].comics.items[n].name);
+					}
 					fetchedCharacters.push({
-						...res.data[key],
-						id: key,
+						id: results[i].id,
+						name: results[i].name,
+						description: results[i].description,
+						thumbnail: results[i].thumbnail.path,
+						comics: comics,
 					});
 				}
 				dispatch(fetchCharactersSuccess(fetchedCharacters));
