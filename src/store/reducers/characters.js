@@ -13,7 +13,7 @@ const fetchCharactersStart = (state, action) => {
 
 const fetchCharactersSuccess = (state, action) => {
 	return updateObject(state, {
-		Characters: action.characters,
+		characters: action.characters,
 		loading: false,
 	});
 };

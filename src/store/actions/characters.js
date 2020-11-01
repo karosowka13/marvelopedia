@@ -39,7 +39,7 @@ export const fetchCharacters = () => {
 						id: results[i].id,
 						name: results[i].name,
 						description: results[i].description,
-						thumbnail: results[i].thumbnail.path,
+						thumbnail: results[i].thumbnail,
 						comics: comics,
 					});
 				}

@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Route, withRouter, Switch } from "react-router-dom";
-
+import { withRouter, Link } from "react-router-dom";
+import Button from "../../components/UI/Button/Button";
 import * as actions from "../../store/actions/index";
 
 import Spinner from "../../components/UI/Spinner/Spinner";
+import Card from "../../components/Card/Card";
 import classes from "./Marvelopedia.module.css";
 
 class Marvelopedia extends Component {
@@ -16,22 +17,32 @@ class Marvelopedia extends Component {
 		this.props.fetchCharacters();
 	}
 	render() {
+		let imgSrc = null;
+		const charactersDisplay = this.props.charactersList.map(
+			(character) => (
+				(imgSrc =
+					character.thumbnail.path +
+					"/" +
+					"portrait_xlarge." +
+					character.thumbnail.extension),
+				(
+					<li key={character.id}>
+						<div className={classes.Character}>
+							<Link to={"/" + character.name}>
+								<img src={imgSrc} alt="character_image" />
+								<div className={classes.BackgroundText}>
+									<p>{character.name}</p>
+									<Button btnType="Success">Add to favorites</Button>
+								</div>
+							</Link>
+						</div>
+					</li>
+				)
+			)
+		);
 		return (
 			<React.Fragment>
-				<p>Hello</p>
-				<ul className={classes.cartList}>
-					{this.props.charactersList.map((character) => (
-						<li key={character.id}>
-							<div className={classes.character}>
-								<a href={"#" + character.name}>
-									<img src={character.thumbnail} alt="character_image" />
-									<p>{character.name}</p>
-									<button>Add to favorites</button>
-								</a>
-							</div>
-						</li>
-					))}
-				</ul>
+				<ul className={classes.CartList}>{charactersDisplay}</ul>
 			</React.Fragment>
 		);
 	}
