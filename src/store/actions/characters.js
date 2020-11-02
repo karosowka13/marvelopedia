@@ -55,3 +55,13 @@ export const fetchCharacters = () => {
 			});
 	};
 };
+
+export const inputChangeHandler = (event) => {
+	const value = event.target.value;
+	return { type: actionTypes.SEARCH_CHARACTER, inputValue: value };
+};
+
+export const selectChangeHandler = (event) => {
+	const value = event.target.value;
+	return { type: actionTypes.SELECT_CHARACTER, selectValue: value };
+};

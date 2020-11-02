@@ -6,6 +6,7 @@ const initialState = {
 	loading: false,
 	error: null,
 	success: false,
+	filteredCharacters: [],
 };
 
 const fetchCharactersStart = (state, action) => {
@@ -23,6 +24,9 @@ const fetchCharactersSuccess = (state, action) => {
 const fetchCharactersFail = (state, action) => {
 	return updateObject(state, { loading: false });
 };
+
+const selectCharacter = (state, action) => {};
+const searchCharacter = (state, action) => {};
 
 const reducer = (state = initialState, action) => {
 	switch (action.type) {

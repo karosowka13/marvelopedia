@@ -5,6 +5,7 @@ import Button from "../../components/UI/Button/Button";
 import * as actions from "../../store/actions/index";
 
 import Spinner from "../../components/UI/Spinner/Spinner";
+import Filter from "./Filter/Filter";
 import classes from "./Marvelopedia.module.css";
 
 class Marvelopedia extends Component {
@@ -33,6 +34,7 @@ class Marvelopedia extends Component {
 
 		return (
 			<React.Fragment>
+				<Filter />
 				<ul className={classes.CartList}>{charactersDisplay}</ul>
 			</React.Fragment>
 		);
