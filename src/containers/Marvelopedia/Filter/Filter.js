@@ -5,13 +5,6 @@ import classes from "./Filter.module.css";
 
 import Input from "../../../components/UI/Input/Input";
 class Filter extends Component {
-	inputChangedHandler = (event) => {
-		event.preventDfault();
-	};
-	selectChangedHandler = (event) => {
-		event.preventDfault();
-	};
-
 	render() {
 		let comicsList = [];
 		this.props.charactersList.forEach((character) =>
@@ -30,13 +23,19 @@ class Filter extends Component {
 				<div className={classes.filterSearch}>
 					<Input
 						elementType="input"
-						changed={(event) => this.inputChangedHandler(event)}
+						changed={(event) =>
+							this.props.inputChangedHandler(event, this.props.charactersList)
+						}
 						placeholder="Find character"
 					/>
 				</div>
 				<div className={classes.filterComics}>
 					Appears in comics:
-					<select onChange={(event) => this.selectChangeHandler(event)}>
+					<select
+						onChange={(event) =>
+							this.props.selectChangeHandler(event, this.props.charactersList)
+						}
+					>
 						<option value="">All</option>
 						{selectComicsName}
 					</select>

@@ -25,7 +25,12 @@ const fetchCharactersFail = (state, action) => {
 	return updateObject(state, { loading: false });
 };
 
-const selectCharacter = (state, action) => {};
+const selectCharacter = (state, action) => {
+	const filteredCharactersNew = state.filteredCharacters.filter(
+		(character) => character.comics.indexOf(action.selectValue) >= 0
+	);
+	return updateObject(state, { filteredCharacters: filteredCharactersNew });
+};
 const searchCharacter = (state, action) => {};
 
 const reducer = (state = initialState, action) => {
@@ -36,6 +41,10 @@ const reducer = (state = initialState, action) => {
 			return fetchCharactersSuccess(state, action);
 		case actionTypes.FETCH_CHARACTERS_FAIL:
 			return fetchCharactersFail(state, action);
+		case actionTypes.SELECT_CHARACTER:
+			return selectCharacter(state, action);
+		case actionTypes.SEARCH_CHARACTER:
+			return searchCharacter(state, action);
 		default:
 			return state;
 	}
