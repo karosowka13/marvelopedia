@@ -5,41 +5,32 @@ import Button from "../../components/UI/Button/Button";
 import * as actions from "../../store/actions/index";
 
 import Spinner from "../../components/UI/Spinner/Spinner";
-import Card from "../../components/Card/Card";
 import classes from "./Marvelopedia.module.css";
 
 class Marvelopedia extends Component {
-	constructor(props) {
-		super(props);
-		this.state = { modalShow: true };
-	}
 	componentDidMount() {
 		this.props.fetchCharacters();
 	}
 	render() {
-		let imgSrc = null;
-		const charactersDisplay = this.props.charactersList.map(
-			(character) => (
-				(imgSrc =
-					character.thumbnail.path +
-					"/" +
-					"portrait_xlarge." +
-					character.thumbnail.extension),
-				(
-					<li key={character.id}>
-						<div className={classes.Character}>
-							<Link to={"/" + character.name}>
-								<img src={imgSrc} alt="character_image" />
-								<div className={classes.BackgroundText}>
-									<p>{character.name}</p>
-									<Button btnType="Success">Add to favorites</Button>
-								</div>
-							</Link>
-						</div>
-					</li>
-				)
-			)
-		);
+		let charactersDisplay = null;
+		if (this.props.loading) {
+			charactersDisplay = <Spinner />;
+		} else if (this.props.charactersList) {
+			charactersDisplay = this.props.charactersList.map((character) => (
+				<li key={character.id}>
+					<div className={classes.Character}>
+						<Link to={"/" + character.name}>
+							<img src={character.imgPath} alt="character_image" />
+							<div className={classes.BackgroundText}>
+								<p>{character.name}</p>
+								<Button btnType="Success">Add to favorites</Button>
+							</div>
+						</Link>
+					</div>
+				</li>
+			));
+		} else charactersDisplay = <p>We are facing some problems, sorry.</p>;
+
 		return (
 			<React.Fragment>
 				<ul className={classes.CartList}>{charactersDisplay}</ul>

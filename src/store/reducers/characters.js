@@ -5,6 +5,7 @@ const initialState = {
 	characters: [],
 	loading: false,
 	error: null,
+	success: false,
 };
 
 const fetchCharactersStart = (state, action) => {
@@ -15,6 +16,7 @@ const fetchCharactersSuccess = (state, action) => {
 	return updateObject(state, {
 		characters: action.characters,
 		loading: false,
+		success: true,
 	});
 };
 

@@ -5,6 +5,9 @@
 	justify-content: center;
 	align-items: center;
 }
+ul {
+	padding: 0;
+}
 .CartList li {
 	list-style: none;
 }

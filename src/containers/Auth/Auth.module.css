@@ -1,0 +1,20 @@
+.Auth {
+	margin: 20px auto;
+	width: 80%;
+	text-align: center;
+	border: 1px solid #eee;
+	padding: 10px;
+	box-sizing: border-box;
+	-webkit-box-shadow: 0 10px 6px -6px #777;
+	-moz-box-shadow: 0 10px 6px -6px #777;
+	box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+		0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+		0 10.3px 5.9px rgba(0, 0, 0, 0.072), 0 21.8px 20.4px rgba(0, 0, 0, 0.086),
+		0 40px 40px rgba(0, 0, 0, 0.12);
+}
+
+@media (min-width: 600px) {
+	.Auth {
+		width: 500px;
+	}
+}

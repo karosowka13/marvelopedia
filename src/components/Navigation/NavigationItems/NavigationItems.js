@@ -8,9 +8,9 @@ const navigationItems = (props) => (
 		<NavigationItem link="/" exact>
 			Marvelopedia
 		</NavigationItem>
-		{props.isAuthenticated ? (
-			<NavigationItem link="/favorite">Saved characters</NavigationItem>
-		) : null}
+
+		<NavigationItem link="/favorite">Saved characters</NavigationItem>
+
 		{!props.isAuthenticated ? (
 			<NavigationItem link="/auth">Authenticate</NavigationItem>
 		) : (

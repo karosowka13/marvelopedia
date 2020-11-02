@@ -35,11 +35,16 @@ export const fetchCharacters = () => {
 					for (let n = 0; n < results[i].comics.items.length; n++) {
 						comics.push(results[i].comics.items[n].name);
 					}
+
 					fetchedCharacters.push({
 						id: results[i].id,
 						name: results[i].name,
 						description: results[i].description,
-						thumbnail: results[i].thumbnail,
+						imgPath:
+							results[i].thumbnail.path +
+							"/" +
+							"portrait_xlarge." +
+							results[i].thumbnail.extension,
 						comics: comics,
 					});
 				}
