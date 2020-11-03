@@ -24,7 +24,7 @@ export const fetchCharactersStart = () => {
 export const fetchCharacters = () => {
 	return (dispatch) => {
 		dispatch(fetchCharactersStart());
-		const queryParams = "apikey=" + process.env.REACT_APP_API_PUBLIC_KEY;
+		const queryParams = "apikey=9ae1505f5688a5e9d19904d452628af5";
 		axios
 			.get(
 				"https://gateway.marvel.com/v1/public/characters?limit=25&" +

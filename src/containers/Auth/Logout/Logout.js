@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import * as actions from "../../../store/actions/index";
 
@@ -21,3 +22,7 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(null, mapDispatchToProps)(Logout);
+
+Logout.propTypes = {
+	onLogout: PropTypes.func,
+};

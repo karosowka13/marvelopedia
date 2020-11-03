@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withRouter, Link } from "react-router-dom";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import * as actions from "../../store/actions/index";
 import classes from "./FavouritesCards.module.css";
@@ -10,7 +11,9 @@ import Button from "../../components/UI/Button/Button";
 class FavouritesCards extends Component {
 	render() {
 		let charactersDisplay = null;
+		let header = null;
 		if (this.props.favouritesChar.length) {
+			header = <h2>Your favourites characters:</h2>;
 			charactersDisplay = this.props.favouritesChar.map((character) => (
 				<li key={character.id}>
 					<div className={classes.Character}>
@@ -29,10 +32,10 @@ class FavouritesCards extends Component {
 					</div>
 				</li>
 			));
-		} else return <p>You don't have any saved characters.</p>;
+		} else header = <h2>You don't have any saved characters.</h2>;
 		return (
-			<div>
-				<h2>Your favourites characters:</h2>
+			<div className={classes.Container}>
+				{header}
 				<ul className={classes.CartList}>{charactersDisplay}</ul>
 			</div>
 		);
@@ -54,3 +57,8 @@ const mapDispatchToProps = (dispatch) => {
 export default withRouter(
 	connect(mapStateToProps, mapDispatchToProps)(FavouritesCards)
 );
+
+FavouritesCards.propTypes = {
+	favouritesChar: PropTypes.array,
+	removeFromFav: PropTypes.func,
+};

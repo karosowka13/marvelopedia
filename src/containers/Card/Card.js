@@ -95,4 +95,10 @@ export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Card));
 
 Card.propTypes = {
 	match: PropTypes.object.isRequired,
+	charactersData: PropTypes.array,
+	successFetchCharacter: PropTypes.bool,
+	loading: PropTypes.bool,
+	favourites: PropTypes.array,
+	fetchCharacters: PropTypes.func,
+	addToFav: PropTypes.func,
 };

@@ -1,0 +1,17 @@
+FROM node:alpine
+
+COPY marvelopedia /marvelopedia
+WORKDIR /marvelopedia
+
+# ENV REACT_APP_PUBLIC_KEY 9ae1505f5688a5e9d19904d452628af5
+
+# install app dependencies
+COPY package.json ./
+COPY package-lock.json ./
+
+RUN npm install
+
+# add marvelopedia
+COPY . ./
+
+CMD ["npm", "run", "start"]

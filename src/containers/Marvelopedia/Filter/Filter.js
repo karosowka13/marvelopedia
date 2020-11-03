@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions/index";
 import classes from "./Filter.module.css";
+import PropTypes, { array } from "prop-types";
 
 import Input from "../../../components/UI/Input/Input";
 class Filter extends Component {
@@ -60,3 +61,9 @@ const mapDispatchToProps = (dispatch) => {
 	};
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Filter);
+
+Filter.propTypes = {
+	charactersList: array,
+	inputed: PropTypes.string,
+	selected: PropTypes.string,
+};

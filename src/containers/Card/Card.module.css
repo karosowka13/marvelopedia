@@ -37,7 +37,6 @@
 	width: 90%;
 	padding: 15px;
 	display: grid;
-
 	place-items: left;
 	padding-left: 25px;
 }
@@ -45,6 +44,7 @@
 	text-align: justify;
 	font-size: 0.8em;
 	letter-spacing: 1px;
+	font-size: 15px;
 }
 .Container h2 {
 	letter-spacing: 1px;

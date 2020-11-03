@@ -1,3 +1,10 @@
+.Container h2 {
+	margin: 0 30px;
+	text-align: center;
+	letter-spacing: 1px;
+	padding-top: 1%;
+	border-bottom: 0.1rem #c0c0c0 solid;
+}
 .CartList {
 	display: flex;
 	flex-direction: row;
@@ -5,6 +12,7 @@
 	justify-content: center;
 	align-items: center;
 }
+
 ul {
 	padding: 0;
 }

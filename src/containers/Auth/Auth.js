@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import Input from "../../components/UI/Input/Input";
 import Button from "../../components/UI/Button/Button";
@@ -144,3 +145,9 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Auth);
+
+Auth.propTypes = {
+	email: PropTypes.string,
+	password: PropTypes.string,
+	isSignup: PropTypes.bool,
+};

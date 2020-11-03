@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import Button from "../../components/UI/Button/Button";
 import * as actions from "../../store/actions/index";
 
@@ -74,3 +75,11 @@ const mapDispatchToProps = (dispatch) => {
 export default withRouter(
 	connect(mapStateToProps, mapDispatchToProps)(Marvelopedia)
 );
+
+Marvelopedia.propTypes = {
+	fetchCharacters: PropTypes.func,
+	addToFav: PropTypes.func,
+	charactersList: PropTypes.array,
+	loading: PropTypes.bool,
+	favourites: PropTypes.array,
+};
