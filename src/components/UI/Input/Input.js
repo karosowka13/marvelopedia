@@ -39,9 +39,10 @@ const input = (props) => {
 					value={props.value}
 					onChange={props.changed}
 				>
+					<option value="">All comics</option>
 					{props.elementConfig.options.map((option) => (
-						<option key={option.value} value={option.value}>
-							{option.displayValue}
+						<option key={option} value={option}>
+							{option}
 						</option>
 					))}
 				</select>

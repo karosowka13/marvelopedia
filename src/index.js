@@ -10,6 +10,7 @@ import thunk from "redux-thunk";
 
 import authReducer from "./store/reducers/auth";
 import charactersReducer from "./store/reducers/characters";
+import favouritesReducer from "./store/reducers/favourites";
 
 const composeEnhancers =
 	(window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
@@ -21,6 +22,7 @@ const composeEnhancers =
 const rootReducer = combineReducers({
 	characters: charactersReducer,
 	auth: authReducer,
+	favourites: favouritesReducer,
 });
 
 const store = createStore(

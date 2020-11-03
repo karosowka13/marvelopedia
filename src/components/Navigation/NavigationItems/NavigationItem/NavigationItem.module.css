@@ -21,6 +21,10 @@
 	border-bottom: 6px solid #072845;
 }
 
+.Disabled a {
+	background-color: #ccc;
+	pointer-events: none;
+}
 @media (min-width: 500px) {
 	.NavigationItem {
 		margin: 0;

@@ -12,14 +12,8 @@ class Filter extends Component {
 		);
 
 		let uniqueComicsList = [...new Set(comicsList)];
-		console.log(uniqueComicsList);
-		let selectComicsName = null;
-		selectComicsName = uniqueComicsList.map((comics) => (
-			<option value={comics}>{comics}</option>
-		));
 		return (
 			<div className={classes.Filter}>
-				<div className={classes.filterResult}>{this.props.count}</div>
 				<div className={classes.filterSearch}>
 					<Input
 						elementType="input"
@@ -27,18 +21,20 @@ class Filter extends Component {
 							this.props.inputChangedHandler(event, this.props.charactersList)
 						}
 						placeholder="Find character"
+						value={this.props.inputed}
+						label="Search"
 					/>
 				</div>
 				<div className={classes.filterComics}>
-					Appears in comics:
-					<select
-						onChange={(event) =>
+					<Input
+						label="Appears in"
+						elementType="select"
+						changed={(event) =>
 							this.props.selectChangeHandler(event, this.props.charactersList)
 						}
-					>
-						<option value="">All</option>
-						{selectComicsName}
-					</select>
+						value={this.props.selected}
+						elementConfig={{ options: uniqueComicsList }}
+					></Input>
 				</div>
 			</div>
 		);
@@ -48,10 +44,16 @@ class Filter extends Component {
 const mapStateToProps = (state) => {
 	return {
 		charactersList: state.characters.characters,
+		inputed: state.characters.inputed,
+		selected: state.characters.selected,
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
-	return { fetchCharacters: () => dispatch(actions.fetchCharacters()) };
+	return {
+		selectChangeHandler: (event) =>
+			dispatch(actions.selectChangeHandler(event)),
+		inputChangedHandler: (event) => dispatch(actions.inputChangeHandler(event)),
+	};
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Filter);

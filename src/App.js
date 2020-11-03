@@ -7,8 +7,8 @@ import Layout from "./hoc/Layout/Layout";
 import Auth from "./containers/Auth/Auth";
 import Logout from "./containers/Auth/Logout/Logout";
 import Marvelopedia from "./containers/Marvelopedia/Marvelopedia";
-import SavedCards from "./containers/SavedCards/SavedCards";
-import Card from "./components/Card/Card";
+import FavouritesCards from "./containers/FavouritesCards/FavouritesCards";
+import Card from "./containers/Card/Card";
 
 class App extends Component {
 	render() {
@@ -25,7 +25,7 @@ class App extends Component {
 			routes = (
 				<Switch>
 					<Route exact path="/auth" component={Auth} />
-					<Route exact path="/favorite" component={SavedCards} />
+					<Route exact path="/favorite" component={FavouritesCards} />
 					<Route exact path="/logout" component={Logout} />
 					<Route exact path="/:characterName" component={Card} />
 					<Route path="/" exact component={Marvelopedia} />

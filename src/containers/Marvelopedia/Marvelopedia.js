@@ -23,10 +23,21 @@ class Marvelopedia extends Component {
 						<Link to={"/" + character.name}>
 							<img src={character.imgPath} alt="character_image" />
 							<div className={classes.BackgroundText}>
-								<p>{character.name}</p>
-								<Button btnType="Success">Add to favorites</Button>
+								<p>{character.name}</p>{" "}
 							</div>
 						</Link>
+						<Button
+							btnType="Success"
+							clicked={() => this.props.addToFav(character)}
+							disabled={
+								this.props.favourites.filter((fav) => fav.id === character.id)
+									.length > 0
+									? true
+									: false
+							}
+						>
+							Add to favorites
+						</Button>
 					</div>
 				</li>
 			));
@@ -43,14 +54,18 @@ class Marvelopedia extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		charactersList: state.characters.characters,
+		charactersList: state.characters.filteredCharacters,
 		loading: state.characters.loading,
 		error: state.characters.error,
+		favourites: state.favourites.charactersFav,
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
-	return { fetchCharacters: () => dispatch(actions.fetchCharacters()) };
+	return {
+		fetchCharacters: () => dispatch(actions.fetchCharacters()),
+		addToFav: (character) => dispatch(actions.addCharacter(character)),
+	};
 };
 
 export default withRouter(

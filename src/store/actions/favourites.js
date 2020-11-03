@@ -1,15 +1,15 @@
 import * as actionTypes from "./actionTypes";
 
-export const addCharacter = (name) => {
+export const addCharacter = (character) => {
 	return {
 		type: actionTypes.ADD_CHARACTER,
-		CharacterName: name,
+		newFav: character,
 	};
 };
 
-export const removeCharacter = (name) => {
+export const removeCharacter = (character) => {
 	return {
 		type: actionTypes.REMOVE_CHARACTER,
-		CharacterName: name,
+		deletedFav: character,
 	};
 };

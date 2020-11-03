@@ -9,7 +9,9 @@ const navigationItems = (props) => (
 			Marvelopedia
 		</NavigationItem>
 
-		<NavigationItem link="/favorite">Saved characters</NavigationItem>
+		<NavigationItem link="/favorite" disabled={!props.isAuthenticated}>
+			Favourites
+		</NavigationItem>
 
 		{!props.isAuthenticated ? (
 			<NavigationItem link="/auth">Authenticate</NavigationItem>

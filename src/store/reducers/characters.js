@@ -6,6 +6,8 @@ const initialState = {
 	loading: false,
 	error: null,
 	success: false,
+	inputed: "",
+	selected: "",
 	filteredCharacters: [],
 };
 
@@ -16,6 +18,7 @@ const fetchCharactersStart = (state, action) => {
 const fetchCharactersSuccess = (state, action) => {
 	return updateObject(state, {
 		characters: action.characters,
+		filteredCharacters: action.characters,
 		loading: false,
 		success: true,
 	});
@@ -26,12 +29,26 @@ const fetchCharactersFail = (state, action) => {
 };
 
 const selectCharacter = (state, action) => {
-	const filteredCharactersNew = state.filteredCharacters.filter(
-		(character) => character.comics.indexOf(action.selectValue) >= 0
-	);
+	let filteredCharactersNew = null;
+	if (action.selectedValue === "") {
+		filteredCharactersNew = state.characters;
+	} else
+		filteredCharactersNew = state.characters.filter(
+			(character) => character.comics.indexOf(action.selectedValue) >= 0
+		);
 	return updateObject(state, { filteredCharacters: filteredCharactersNew });
 };
-const searchCharacter = (state, action) => {};
+const searchCharacter = (state, action) => {
+	let searchedCharactersNew = null;
+	const regex = new RegExp(action.inputedValue, "i");
+	if (action.inputedValue === "") {
+		searchedCharactersNew = state.characters;
+	} else
+		searchedCharactersNew = state.characters.filter((character) =>
+			character.name.match(regex)
+		);
+	return updateObject(state, { filteredCharacters: searchedCharactersNew });
+};
 
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
