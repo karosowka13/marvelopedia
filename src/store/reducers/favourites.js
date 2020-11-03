@@ -13,10 +13,8 @@ const addCharacter = (state, action) => {
 };
 
 const removeCharacter = (state, action) => {
-	const oldCharactersFav = [...state.charactersFav];
-	console.log(action.deletedFav);
-	let updatedFav = oldCharactersFav.filter(
-		(fav) => fav.id === action.deletedFav.id
+	const updatedFav = state.charactersFav.filter(
+		(fav) => fav.id !== action.deletedFav.id
 	);
 	return updateObject(state, { charactersFav: updatedFav });
 };

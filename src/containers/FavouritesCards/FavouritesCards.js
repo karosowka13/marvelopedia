@@ -10,7 +10,7 @@ import Button from "../../components/UI/Button/Button";
 class FavouritesCards extends Component {
 	render() {
 		let charactersDisplay = null;
-		if (this.props.favouritesChar) {
+		if (this.props.favouritesChar.length) {
 			charactersDisplay = this.props.favouritesChar.map((character) => (
 				<li key={character.id}>
 					<div className={classes.Character}>

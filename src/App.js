@@ -15,8 +15,7 @@ class App extends Component {
 		let routes = (
 			<Switch>
 				<Route exact path="/auth" component={Auth} />
-				<Route exact path="/logout" component={Logout} />
-				<Route exact path="/:characterName" component={Card} />
+				<Route path="/:characterName" component={Card} />
 				<Route path="/" exact component={Marvelopedia} />
 				<Redirect to="/" />
 			</Switch>
@@ -24,10 +23,9 @@ class App extends Component {
 		if (this.props.isAuthenticated) {
 			routes = (
 				<Switch>
-					<Route exact path="/auth" component={Auth} />
-					<Route exact path="/favorite" component={FavouritesCards} />
-					<Route exact path="/logout" component={Logout} />
-					<Route exact path="/:characterName" component={Card} />
+					<Route path="/favorite" component={FavouritesCards} />
+					<Route path="/logout" component={Logout} />
+					<Route path="/:characterName" component={Card} />
 					<Route path="/" exact component={Marvelopedia} />
 					<Redirect to="/" />
 				</Switch>

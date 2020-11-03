@@ -10,4 +10,4 @@ export const AUTH_FAIL = "AUTH_FAIL";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
 
 export const ADD_CHARACTER = "ADD_CHARACTER";
-export const REMOVE_CHARACTER = "REMOVER_CHARACTER";
+export const REMOVE_CHARACTER = "REMOVE_CHARACTER";
