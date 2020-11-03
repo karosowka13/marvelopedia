@@ -9,31 +9,26 @@ import Logout from "./containers/Auth/Logout/Logout";
 import Marvelopedia from "./containers/Marvelopedia/Marvelopedia";
 import FavouritesCards from "./containers/FavouritesCards/FavouritesCards";
 import Card from "./containers/Card/Card";
+import PrivateRoute from "./hoc/PrivateRoute/PrivateRoute";
 
 class App extends Component {
 	render() {
-		let routes = (
-			<Switch>
-				<Route exact path="/auth" component={Auth} />
-				<Route path="/:characterName" component={Card} />
-				<Route path="/" exact component={Marvelopedia} />
-				<Redirect to="/" />
-			</Switch>
-		);
-		if (this.props.isAuthenticated) {
-			routes = (
-				<Switch>
-					<Route path="/favorite" component={FavouritesCards} />
-					<Route path="/logout" component={Logout} />
-					<Route path="/:characterName" component={Card} />
-					<Route path="/" exact component={Marvelopedia} />
-					<Redirect to="/" />
-				</Switch>
-			);
-		}
 		return (
 			<div>
-				<Layout>{routes}</Layout>
+				<Layout>
+					<Switch>
+						<Route path="/auth" component={Auth} />
+						<PrivateRoute
+							path="/favorite"
+							component={FavouritesCards}
+							isAuthenticated={this.props.isAuthenticated}
+						/>
+						<Route path="/logout" component={Logout} />
+						<Route path="/:characterName" component={Card} />
+						<Route path="/" exact component={Marvelopedia} />
+						<Redirect to="/" />
+					</Switch>
+				</Layout>
 			</div>
 		);
 	}

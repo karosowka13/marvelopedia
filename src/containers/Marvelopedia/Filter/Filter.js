@@ -10,8 +10,11 @@ class Filter extends Component {
 		this.props.charactersList.forEach((character) =>
 			comicsList.push(...character.comics)
 		);
-
-		let uniqueComicsList = [...new Set(comicsList)];
+		const shorComicsList = comicsList.map(
+			(comics) => (comics = comics.split(" (", 1)[0])
+		);
+		const uniqueComicsList = [...new Set(shorComicsList)];
+		uniqueComicsList.sort();
 		return (
 			<div className={classes.Filter}>
 				<div className={classes.filterSearch}>

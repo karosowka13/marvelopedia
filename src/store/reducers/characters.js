@@ -32,22 +32,32 @@ const selectCharacter = (state, action) => {
 	let filteredCharactersNew = null;
 	if (action.selectedValue === "") {
 		filteredCharactersNew = state.characters;
-	} else
-		filteredCharactersNew = state.characters.filter(
-			(character) => character.comics.indexOf(action.selectedValue) >= 0
+	} else {
+		filteredCharactersNew = state.characters.filter((character) =>
+			character.comics
+				.map((element) => element.includes(action.selectedValue))
+				.includes(true)
 		);
-	return updateObject(state, { filteredCharacters: filteredCharactersNew });
+	}
+	return updateObject(state, {
+		filteredCharacters: filteredCharactersNew,
+		selected: action.selectedValue,
+	});
 };
+
 const searchCharacter = (state, action) => {
 	let searchedCharactersNew = null;
 	const regex = new RegExp(action.inputedValue, "i");
 	if (action.inputedValue === "") {
-		searchedCharactersNew = state.characters;
+		searchedCharactersNew = state.filteredCharacters;
 	} else
-		searchedCharactersNew = state.characters.filter((character) =>
+		searchedCharactersNew = state.filteredCharacters.filter((character) =>
 			character.name.match(regex)
 		);
-	return updateObject(state, { filteredCharacters: searchedCharactersNew });
+	return updateObject(state, {
+		filteredCharacters: searchedCharactersNew,
+		inputed: action.inputedValue,
+	});
 };
 
 const reducer = (state = initialState, action) => {

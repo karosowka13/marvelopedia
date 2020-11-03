@@ -41,7 +41,10 @@ class Marvelopedia extends Component {
 					</div>
 				</li>
 			));
-		} else charactersDisplay = <p>We are facing some problems, sorry.</p>;
+		} else
+			charactersDisplay = (
+				<p>We are facing some problems, sorry. Go back later.</p>
+			);
 
 		return (
 			<React.Fragment>
