@@ -17,7 +17,7 @@ class Filter extends Component {
 		uniqueComicsList.sort();
 		return (
 			<div className={classes.Filter}>
-				<div className={classes.filterSearch}>
+				<div className={classes.FilterSearch}>
 					<Input
 						elementType="input"
 						changed={(event) =>
@@ -25,7 +25,7 @@ class Filter extends Component {
 						}
 						placeholder="Find character"
 						value={this.props.inputed}
-						label="Search"
+						label="Search all"
 					/>
 				</div>
 				<div className={classes.filterComics}>

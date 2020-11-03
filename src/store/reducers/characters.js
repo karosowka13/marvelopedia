@@ -49,9 +49,9 @@ const searchCharacter = (state, action) => {
 	let searchedCharactersNew = null;
 	const regex = new RegExp(action.inputedValue, "i");
 	if (action.inputedValue === "") {
-		searchedCharactersNew = state.filteredCharacters;
+		searchedCharactersNew = state.characters;
 	} else
-		searchedCharactersNew = state.filteredCharacters.filter((character) =>
+		searchedCharactersNew = state.characters.filter((character) =>
 			character.name.match(regex)
 		);
 	return updateObject(state, {

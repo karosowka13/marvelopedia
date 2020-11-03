@@ -3,11 +3,10 @@
 	justify-content: space-between;
 	padding: 1rem;
 	margin: 1rem;
-
 	border-bottom: 0.1rem #c0c0c0 solid;
 }
 .Filter div {
-	flex: 1 40%;
+	flex: 1 45%;
 }
 
 @media (max-width: 500px) {

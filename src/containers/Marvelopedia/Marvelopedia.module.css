@@ -12,7 +12,12 @@ ul {
 	list-style: none;
 }
 
+.Character p {
+	letter-spacing: 1px;
+}
+
 .Character {
+	border-radius: 3%;
 	display: flex;
 	flex-wrap: wrap;
 	flex: 1 18%;
@@ -31,6 +36,7 @@ ul {
 }
 .Character img {
 	border-bottom: 10px solid #072845;
+	border-radius: 3% 3% 0 0;
 }
 .BackgroundText {
 	width: 100%;

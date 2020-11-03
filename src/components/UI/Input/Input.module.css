@@ -8,6 +8,7 @@
 	font-weight: bold;
 	display: block;
 	margin-bottom: 8px;
+	letter-spacing: 1px;
 }
 
 .InputElement {
@@ -19,6 +20,7 @@
 	display: block;
 	width: 100%;
 	box-sizing: border-box;
+	border-radius: 0.5rem;
 }
 
 .InputElement:focus {
