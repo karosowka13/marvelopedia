@@ -5,27 +5,31 @@ What is more, after siging in, all your favourites characters can be saved! Late
 
 ## Functions
 
-1. Fetches data from an external API
-2. Prop Types typings for Components
+1. Fetches data from an external Marvel API
+2. Prop Types typings for React Components
 3. Implemented Redux app state management
 4. Implemented responsive design
 5. Includes a mock authentication functionality- save a fake token to memory in order to access to the private root of the main app view after reloading or reopening the tab
 6. Data presented as cards on a grid
 7. Cards include shortened data from their respective data nodes and navigate to full data view when clicked
 8. Allows users to access respective data nodes views by a URL with a name, e.g. `~/A.I.M.` to access A.I.M. character full data view
-9. Search all libraly or find by the comics
+9. Search all resources
+10. Filter by the comics title
 
 ## Perview of the application
 
 ![](./images/marvelopedia.gif)
 ![](./images/marvelopediaMobile.gif)
 
-## Start with docker
+## How to start the app with docker
 
-The image is prepared to production build and it is run on ngnix server. The app is running at [http://localhost:8000](http://localhost:8000)
+The image is prepared to production build and it is run on ngnix server.
+
 To run the image:
 
 ### `docker run -itp 8000:8000 karosowa/marvelopedia-front:1.0.0`
+
+The app is running at [http://localhost:8000](http://localhost:8000).
 
 ## Build with docker
 
@@ -33,11 +37,13 @@ To build the image:
 
 ### `docker build -t karosowa/marvelopedia-front:1.0.0 .`
 
-### `docker push karosowa/marvelopedia-front:1.0.0 `
-
 ## How to start with npm
 
 After downloading repository, in the project directory, you can run:
+
+### `npm install`
+
+and then
 
 ### `npm start`
 

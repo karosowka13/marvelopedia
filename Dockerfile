@@ -3,7 +3,6 @@ FROM node:14.15.0-alpine as builder
 COPY . /marvelopedia
 WORKDIR /marvelopedia
 
-# ENV REACT_APP_PUBLIC_KEY 9ae1505f5688a5e9d19904d452628af5
 
 # install app dependencies
 COPY package.json ./
@@ -11,7 +10,7 @@ COPY package-lock.json ./
 
 RUN npm install
 
-RUN npm run-script build
+RUN npm run build
 
 FROM nginx:1.19.0-alpine
 
