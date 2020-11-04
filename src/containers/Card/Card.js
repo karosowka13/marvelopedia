@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
@@ -23,50 +23,50 @@ class Card extends Component {
 		let spinner = null;
 		if (this.props.successFetchCharacter) {
 			this.props.charactersData.forEach((character) => {
-				if (character.name === match.params.characterName)
+				if (character.name === match.params.characterName) {
 					characterOnCard = character;
+				} else isReadyCard = <Redirect to="/" />;
 			});
 
-			if (characterOnCard.comics) {
+			if (characterOnCard) {
 				comicsList = characterOnCard.comics.map((name, i) => (
 					<li key={i}>{name}</li>
 				));
-			}
-
-			isReadyCard = (
-				<div className={classes.Container}>
-					<div>
-						<img
-							className={classes.Image}
-							src={characterOnCard.imgPath}
-							alt="character_image"
-						/>
-						<h2>{characterOnCard.name}</h2>
-						<div className={classes.Description}>
-							<h3>Description</h3>
-							<p>{characterOnCard.description}</p>
+				isReadyCard = (
+					<div className={classes.Container}>
+						<div>
+							<img
+								className={classes.Image}
+								src={characterOnCard.imgPath}
+								alt="character_image"
+							/>
+							<h2>{characterOnCard.name}</h2>
+							<div className={classes.Description}>
+								<h3>Description</h3>
+								<p>{characterOnCard.description}</p>
+							</div>
 						</div>
-					</div>
 
-					<div className={classes.Comics}>
-						<h3>Appears in:</h3>
-						<ul className={classes.ComicsList}>{comicsList}</ul>
+						<div className={classes.Comics}>
+							<h3>Appears in:</h3>
+							<ul className={classes.ComicsList}>{comicsList}</ul>
+						</div>
+						<Button
+							btnType="Success"
+							clicked={() => this.props.addToFav(characterOnCard)}
+							disabled={
+								this.props.favourites.filter(
+									(fav) => fav.id === characterOnCard.id
+								).length > 0
+									? true
+									: false
+							}
+						>
+							Add to favorite
+						</Button>
 					</div>
-					<Button
-						btnType="Success"
-						clicked={() => this.props.addToFav(characterOnCard)}
-						disabled={
-							this.props.favourites.filter(
-								(fav) => fav.id === characterOnCard.id
-							).length > 0
-								? true
-								: false
-						}
-					>
-						Add to favorite
-					</Button>
-				</div>
-			);
+				);
+			}
 		} else if (this.props.loading) {
 			spinner = <Spinner />;
 		}
