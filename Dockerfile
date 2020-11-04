@@ -8,6 +8,8 @@ WORKDIR /marvelopedia
 COPY package.json ./
 COPY package-lock.json ./
 
+ENV NODE_ENV production
+
 RUN npm install
 
 RUN npm run build
