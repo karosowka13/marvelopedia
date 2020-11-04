@@ -3,7 +3,7 @@ version: "3"
 services:
   # Frontend
   frontend:
-    image: karosowa/marvelopedia:latest
+    image: karosowa/marvelopedia:1.0.0
     stdin_open: true
     build:
       context: .
@@ -11,4 +11,4 @@ services:
       - ".:/marvelopedia"
       - "/marvelopedia/node_modules"
     ports:
-      - "80:3000"
+      - "80:8000"

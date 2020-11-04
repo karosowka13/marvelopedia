@@ -20,6 +20,7 @@ class Card extends Component {
 		let characterOnCard = null;
 		let isReadyCard = null;
 		let comicsList = null;
+		let spinner = null;
 		if (this.props.successFetchCharacter) {
 			this.props.charactersData.forEach((character) => {
 				if (character.name === match.params.characterName)
@@ -33,7 +34,7 @@ class Card extends Component {
 			}
 
 			isReadyCard = (
-				<React.Fragment>
+				<div className={classes.Container}>
 					<div>
 						<img
 							className={classes.Image}
@@ -64,12 +65,16 @@ class Card extends Component {
 					>
 						Add to favorite
 					</Button>
-				</React.Fragment>
+				</div>
 			);
-		} else isReadyCard = <Spinner />;
+		} else if (this.props.loading) {
+			spinner = <Spinner />;
+		}
+
 		return (
 			<div className={classes.Background}>
-				<div className={classes.Container}>{isReadyCard}</div>
+				{spinner}
+				{isReadyCard}
 			</div>
 		);
 	}

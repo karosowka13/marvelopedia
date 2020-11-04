@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { withRouter, Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
-import Button from "../../components/UI/Button/Button";
+
 import * as actions from "../../store/actions/index";
 
+import MiniCard from "../../components/MiniCard/MiniCard";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import Filter from "./Filter/Filter";
 import classes from "./Marvelopedia.module.css";
@@ -19,28 +20,19 @@ class Marvelopedia extends Component {
 			charactersDisplay = <Spinner />;
 		} else if (this.props.charactersList) {
 			charactersDisplay = this.props.charactersList.map((character) => (
-				<li key={character.id}>
-					<div className={classes.Character}>
-						<Link to={"/" + character.name}>
-							<img src={character.imgPath} alt="character_image" />
-							<div className={classes.BackgroundText}>
-								<p>{character.name}</p>{" "}
-							</div>
-						</Link>
-						<Button
-							btnType="Success"
-							clicked={() => this.props.addToFav(character)}
-							disabled={
-								this.props.favourites.filter((fav) => fav.id === character.id)
-									.length > 0
-									? true
-									: false
-							}
-						>
-							Add to favorites
-						</Button>
-					</div>
-				</li>
+				<MiniCard
+					key={character.name}
+					character={character}
+					btnType="Success"
+					clicked={() => this.props.addToFav(character)}
+					isDisabled={
+						this.props.favourites.filter((fav) => fav.id === character.id)
+							.length > 0
+							? true
+							: false
+					}
+					buttonLabel="Add to favorites"
+				/>
 			));
 		} else
 			charactersDisplay = (

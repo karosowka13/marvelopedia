@@ -42,7 +42,7 @@ class Auth extends Component {
 				touched: false,
 			},
 		},
-		isSignup: true,
+		isSignup: false,
 	};
 
 	inputChangedHandler = (event, controlName) => {
@@ -112,17 +112,22 @@ class Auth extends Component {
 		if (this.props.isAuthenticated) {
 			authRedirect = <Redirect to="/" />;
 		}
+		let title = null;
+		if (this.state.isSignup) {
+			title = <h2>SIGN UP</h2>;
+		} else title = <h2>SIGN IN</h2>;
 
 		return (
 			<div className={classes.Auth}>
 				{authRedirect}
+				{title}
 				{errorMessage}
 				<form onSubmit={this.submitHandler}>
 					{form}
 					<Button btnType="Success">SUBMIT</Button>
 				</form>
 				<Button clicked={this.switchAuthModeHandler} btnType="GoTo">
-					SWITCH TO {this.state.isSignup ? "SIGNIN" : "SIGNUP"}
+					SWITCH TO {this.state.isSignup ? "SIGN IN" : "SIGN UP"}
 				</Button>
 			</div>
 		);

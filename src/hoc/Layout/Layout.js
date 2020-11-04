@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import classes from "./Layout.module.css";
 import Toolbar from "../../components/Navigation/Toolbar/Toolbar";
@@ -45,3 +46,9 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps)(Layout);
+
+Layout.propTypes = {
+	showSideDrawer: PropTypes.bool,
+	children: PropTypes.node,
+	isAuthenticated: PropTypes.bool,
+};

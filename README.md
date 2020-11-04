@@ -15,7 +15,27 @@ What is more, after siging in, all your favourites characters can be saved! Late
 8. Allows users to access respective data nodes views by a URL with a name, e.g. `~/A.I.M.` to access A.I.M. character full data view
 9. Search all libraly or find by the comics
 
-## How to start
+## Perview of the application
+
+![](./images/marvelopedia.gif)
+![](./images/marvelopediaMobile.gif)
+
+## Start with docker
+
+The image is prepared to production build and it is run on ngnix server. The app is running at [http://localhost:8000](http://localhost:8000)
+To run the image:
+
+### `docker run -itp 8000:8000 karosowa/marvelopedia-front:1.0.0`
+
+## Build with docker
+
+To build the image:
+
+### `docker build -t karosowa/marvelopedia-front:1.0.0 .`
+
+### `docker push karosowa/marvelopedia-front:1.0.0 `
+
+## How to start with npm
 
 After downloading repository, in the project directory, you can run:
 
@@ -28,5 +48,3 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
-
-## Start with docker
