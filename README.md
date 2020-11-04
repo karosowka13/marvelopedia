@@ -18,7 +18,12 @@ What is more, after siging in, all your favourites characters can be saved! Late
 
 ## Perview of the application
 
+### Desktop view
+
 ![](./images/marvelopedia.gif)
+
+### Mobile view
+
 ![](./images/marvelopediaMobile.gif)
 
 ## How to start the app with docker
