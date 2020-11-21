@@ -23,6 +23,7 @@ const Filter = () => {
 		}),
 		shallowEqual
 	);
+	// eslint-disable-next-line
 	const debouncedSearch = useCallback(
 		_.debounce(
 			(nextSearch) =>

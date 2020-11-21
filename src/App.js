@@ -1,7 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import { Route, Switch, Redirect, withRouter } from "react-router-dom";
-import { connect } from "react-redux";
-import * as actions from "./store/actions/index";
+import { useSelector } from "react-redux";
 
 import Layout from "./hoc/Layout/Layout";
 import Auth from "./containers/Auth/Auth";
@@ -11,39 +10,27 @@ import FavouritesCards from "./containers/FavouritesCards/FavouritesCards";
 import Card from "./containers/Card/Card";
 import PrivateRoute from "./hoc/PrivateRoute/PrivateRoute";
 
-class App extends Component {
-	render() {
-		return (
-			<div>
-				<Layout>
-					<Switch>
-						<Route path="/login" component={Auth} />
-						<PrivateRoute
-							path="/favorite"
-							component={FavouritesCards}
-							isAuthenticated={this.props.isAuthenticated}
-						/>
-						<Route path="/logout" component={Logout} />
-						<Route path="/:id" component={Card} />
-						<Route path="/" exact component={Marvelopedia} />
-						<Redirect to="/" />
-					</Switch>
-				</Layout>
-			</div>
-		);
-	}
-}
+const App = () => {
+	const isAuthenticated = useSelector((state) => state.auth.token !== null);
 
-const mapStateToProps = (state) => {
-	return {
-		isAuthenticated: state.auth.token !== null,
-	};
+	return (
+		<div>
+			<Layout>
+				<Switch>
+					<Route path="/login" component={Auth} />
+					<PrivateRoute
+						path="/favorite"
+						component={FavouritesCards}
+						isAuthenticated={isAuthenticated}
+					/>
+					<Route path="/logout" component={Logout} />
+					<Route path="/:id" component={Card} />
+					<Route path="/" exact component={Marvelopedia} />
+					<Redirect to="/" />
+				</Switch>
+			</Layout>
+		</div>
+	);
 };
 
-const mapDispatchToProps = (dispatch) => {
-	return {
-		onTryAutoSignup: () => dispatch(actions.authCheckState()),
-	};
-};
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
+export default withRouter(App);

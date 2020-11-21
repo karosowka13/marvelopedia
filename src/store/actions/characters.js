@@ -32,6 +32,8 @@ export const fetchCharacters = (inputed, selected) => {
 			limit: 50,
 			apikey: process.env.REACT_APP_API_PUBLIC_KEY,
 		};
+
+		//nameStartsWith cannot be null
 		if (inputed) {
 			Object.assign(params, { nameStartsWith: inputed });
 		}

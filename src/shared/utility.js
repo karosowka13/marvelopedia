@@ -8,7 +8,6 @@ export const updateObject = (oldObject, updatedProperties) => {
 export const getCharactersData = (results) => {
 	let fetchedCharacters = results.map((i) => {
 		const comics = i.comics.items.map((comic) => comic.name);
-
 		return {
 			id: i.id,
 			name: i.name,
