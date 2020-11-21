@@ -1,69 +1,71 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { useCallback, useState } from "react";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import * as actions from "../../../store/actions/index";
 import classes from "./Filter.module.css";
-import PropTypes, { array } from "prop-types";
+import PropTypes from "prop-types";
+import _ from "lodash";
 
 import Input from "../../../components/UI/Input/Input";
-class Filter extends Component {
-	render() {
-		let comicsList = [];
-		this.props.charactersList.forEach((character) =>
-			comicsList.push(...character.comics)
-		);
-		const shorComicsList = comicsList.map(
-			(comics) => (comics = comics.split(" (", 1)[0])
-		);
-		const uniqueComicsList = [...new Set(shorComicsList)];
-		uniqueComicsList.sort();
-		return (
-			<div className={classes.Filter}>
-				<div className={classes.FilterSearch}>
-					<Input
-						elementType="input"
-						changed={(event) =>
-							this.props.inputChangedHandler(event, this.props.charactersList)
-						}
-						placeholder="Find character"
-						value={this.props.inputed}
-						label="Search all"
-					/>
-				</div>
-				<div className={classes.filterComics}>
-					<Input
-						label="Appears in"
-						elementType="select"
-						changed={(event) =>
-							this.props.selectChangeHandler(event, this.props.charactersList)
-						}
-						value={this.props.selected}
-						elementConfig={{ options: uniqueComicsList }}
-					></Input>
-				</div>
+const Filter = () => {
+	const [search, setSearch] = useState("");
+
+	const yearsOfModifcation = _.range(
+		new Date().getFullYear() - 50,
+		new Date().getFullYear() + 5,
+		5
+	);
+	const dispatch = useDispatch();
+
+	const { inputed, selected } = useSelector(
+		(state) => ({
+			inputed: state.characters.inputed,
+			selected: state.characters.selected,
+		}),
+		shallowEqual
+	);
+	const debouncedSearch = useCallback(
+		_.debounce(
+			(nextSearch) =>
+				dispatch(actions.inputSearchHandler(nextSearch, selected)),
+			700
+		),
+		[]
+	);
+
+	const inputSearchHandler = (event) => {
+		const nextSearch = event.target.value;
+		setSearch(nextSearch);
+		debouncedSearch(nextSearch);
+	};
+	return (
+		<div className={classes.Filter}>
+			<div className={classes.FilterSearch}>
+				<Input
+					elementType="input"
+					changed={inputSearchHandler}
+					placeholder="Find character"
+					value={search}
+					label="Search by name"
+				/>
 			</div>
-		);
-	}
-}
-
-const mapStateToProps = (state) => {
-	return {
-		charactersList: state.characters.characters,
-		inputed: state.characters.inputed,
-		selected: state.characters.selected,
-	};
+			<div className={classes.filterComics}>
+				<Input
+					label="Modification since"
+					elementType="select"
+					changed={(event) =>
+						dispatch(actions.selectSearchHandler(event, inputed))
+					}
+					value={selected}
+					elementConfig={{ options: yearsOfModifcation }}
+				></Input>
+			</div>
+		</div>
+	);
 };
 
-const mapDispatchToProps = (dispatch) => {
-	return {
-		selectChangeHandler: (event) =>
-			dispatch(actions.selectChangeHandler(event)),
-		inputChangedHandler: (event) => dispatch(actions.inputChangeHandler(event)),
-	};
-};
-export default connect(mapStateToProps, mapDispatchToProps)(Filter);
+export default Filter;
 
 Filter.propTypes = {
-	charactersList: array,
 	inputed: PropTypes.string,
 	selected: PropTypes.string,
 };

@@ -50,7 +50,7 @@ class Marvelopedia extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		charactersList: state.characters.filteredCharacters,
+		charactersList: state.characters.characters,
 		loading: state.characters.loading,
 		error: state.characters.error,
 		favourites: state.favourites.charactersFav,

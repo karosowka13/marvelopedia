@@ -8,7 +8,6 @@ const initialState = {
 	success: false,
 	inputed: "",
 	selected: "",
-	filteredCharacters: [],
 };
 
 const fetchCharactersStart = (state, action) => {
@@ -18,7 +17,6 @@ const fetchCharactersStart = (state, action) => {
 const fetchCharactersSuccess = (state, action) => {
 	return updateObject(state, {
 		characters: action.characters,
-		filteredCharacters: action.characters,
 		loading: false,
 		success: true,
 	});
@@ -29,33 +27,13 @@ const fetchCharactersFail = (state, action) => {
 };
 
 const selectCharacter = (state, action) => {
-	let filteredCharactersNew = null;
-	if (action.selectedValue === "") {
-		filteredCharactersNew = state.characters;
-	} else {
-		filteredCharactersNew = state.characters.filter((character) =>
-			character.comics
-				.map((element) => element.includes(action.selectedValue))
-				.includes(true)
-		);
-	}
 	return updateObject(state, {
-		filteredCharacters: filteredCharactersNew,
 		selected: action.selectedValue,
 	});
 };
 
 const searchCharacter = (state, action) => {
-	let searchedCharactersNew = null;
-	const regex = new RegExp(action.inputedValue, "i");
-	if (action.inputedValue === "") {
-		searchedCharactersNew = state.characters;
-	} else
-		searchedCharactersNew = state.characters.filter((character) =>
-			character.name.match(regex)
-		);
 	return updateObject(state, {
-		filteredCharacters: searchedCharactersNew,
 		inputed: action.inputedValue,
 	});
 };

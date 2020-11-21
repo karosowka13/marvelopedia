@@ -1,5 +1,6 @@
 import * as actionTypes from "./actionTypes";
 import axios from "axios";
+import { getCharactersData } from "../../shared/utility";
 
 export const fetchCharactersSuccess = (characters) => {
 	return {
@@ -21,36 +22,26 @@ export const fetchCharactersStart = () => {
 	};
 };
 
-export const fetchCharacters = () => {
-	return (dispatch) => {
-		dispatch(fetchCharactersStart());
-		const queryParams = "apikey=9ae1505f5688a5e9d19904d452628af5";
-		axios
-			.get(
-				"https://gateway.marvel.com/v1/public/characters?limit=25&" +
-					queryParams
-			)
-			.then((res) => {
-				const fetchedCharacters = [];
-				const results = res.data.data.results;
-				for (let i in results) {
-					let comics = [];
-					for (let n = 0; n < results[i].comics.items.length; n++) {
-						comics.push(results[i].comics.items[n].name);
-					}
+export const fetchCharacters = (inputed, selected) => {
+	return async (dispatch) => {
+		const formatYear = selected ? new Date(selected) : "";
+		const modificationDate = selected ? formatYear.toISOString() : "";
 
-					fetchedCharacters.push({
-						id: results[i].id,
-						name: results[i].name,
-						description: results[i].description,
-						imgPath:
-							results[i].thumbnail.path +
-							"/" +
-							"portrait_xlarge." +
-							results[i].thumbnail.extension,
-						comics: comics,
-					});
-				}
+		const params = {
+			modifiedSince: modificationDate,
+			limit: 50,
+			apikey: process.env.REACT_APP_API_PUBLIC_KEY,
+		};
+		if (inputed) {
+			Object.assign(params, { nameStartsWith: inputed });
+		}
+		dispatch(fetchCharactersStart());
+
+		await axios
+			.get(process.env.REACT_APP_API_URL, { params })
+			.then((res) => {
+				const results = res.data.data.results;
+				const fetchedCharacters = getCharactersData(results);
 				dispatch(fetchCharactersSuccess(fetchedCharacters));
 			})
 			.catch((err) => {
@@ -59,12 +50,25 @@ export const fetchCharacters = () => {
 	};
 };
 
-export const inputChangeHandler = (event) => {
-	const value = event.target.value;
+export const inputSearchHandler = (value, selected) => {
+	return (dispatch) => {
+		dispatch(inputChangeHandler(value));
+		dispatch(fetchCharacters(value, selected));
+	};
+};
+
+export const selectSearchHandler = (event, inputed) => {
+	const selected = event.target.value;
+	return (dispatch) => {
+		dispatch(selectChangeHandler(selected));
+		dispatch(fetchCharacters(inputed, selected));
+	};
+};
+
+export const inputChangeHandler = (value) => {
 	return { type: actionTypes.SEARCH_CHARACTER, inputedValue: value };
 };
 
-export const selectChangeHandler = (event) => {
-	const value = event.target.value;
+export const selectChangeHandler = (value) => {
 	return { type: actionTypes.SELECT_CHARACTER, selectedValue: value };
 };

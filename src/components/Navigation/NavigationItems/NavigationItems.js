@@ -9,12 +9,10 @@ const navigationItems = (props) => (
 			Marvelopedia
 		</NavigationItem>
 
-		<NavigationItem link="/favorite" disabled={!props.isAuthenticated}>
-			Favourites
-		</NavigationItem>
+		<NavigationItem link="/favorite">Favourites</NavigationItem>
 
 		{!props.isAuthenticated ? (
-			<NavigationItem link="/auth">Sign in</NavigationItem>
+			<NavigationItem link="/login">Sign in</NavigationItem>
 		) : (
 			<NavigationItem link="/logout">Logout</NavigationItem>
 		)}
