@@ -1,4 +1,8 @@
 .Auth {
+	display: flex;
+	flex-flow: column;
+
+	align-items: center;
 	border-radius: 0.5rem;
 	margin: 20px auto;
 	width: 80%;
@@ -15,8 +19,46 @@
 }
 
 .Auth h2 {
-	margin: 5px 0 0 0;
+	margin: 6px 0;
 	color: #072845;
+}
+.Auth form {
+	display: flex;
+	align-items: center;
+	flex-flow: column;
+	width: 100%;
+}
+
+.Auth .Label {
+	font-weight: bold;
+	display: block;
+	margin-bottom: 8px;
+	letter-spacing: 1px;
+}
+
+.Auth input {
+	outline: none;
+	border: 1px solid #ccc;
+	background-color: white;
+	font: inherit;
+	padding: 6px 10px;
+	display: block;
+	width: 95%;
+	box-sizing: border-box;
+	border-radius: 0.5rem;
+}
+.Auth form button:first-of-type {
+	margin-top: 20px;
+}
+
+.Auth p {
+	color: red;
+	margin: 10px;
+}
+
+.InputElement:focus {
+	outline: none;
+	background-color: #ccc;
 }
 
 @media (min-width: 600px) {
