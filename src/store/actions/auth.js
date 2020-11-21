@@ -21,21 +21,19 @@ export const authFail = (error) => {
 	};
 };
 
-export const auth = (email, password) => {
+export const auth = (data) => {
 	return (dispatch) => {
 		dispatch(authStart());
 		const token = Math.random().toString(36).substring(2, 20);
+
 		const authData = {
-			email: email,
-			password: password,
+			email: data.email,
+			password: data.password,
 			idToken: token,
-			expiresIn: new Date(),
 		};
-		authData.expiresIn.setHours(authData.expiresIn.getHours() + 1);
 		localStorage.setItem("token", authData.idToken);
 		localStorage.setItem("userId", authData.email);
 		dispatch(authSuccess(authData.idToken, authData.email));
-		dispatch(checkAuthTimeout(authData.expiresIn.getTime()));
 	};
 };
 
@@ -48,32 +46,14 @@ export const logout = () => {
 	};
 };
 
-export const checkAuthTimeout = (expirationTime) => {
-	return (dispatch) => {
-		setTimeout(() => {
-			dispatch(logout());
-		}, 3600000);
-	};
-};
-
 export const authCheckState = () => {
 	return (dispatch) => {
 		const token = localStorage.getItem("token");
 		if (!token) {
 			dispatch(logout());
 		} else {
-			const expirationDate = new Date(localStorage.getItem("expirationDate"));
-			if (expirationDate <= new Date()) {
-				dispatch(logout());
-			} else {
-				const userId = localStorage.getItem("userId");
-				dispatch(authSuccess(token, userId));
-				dispatch(
-					checkAuthTimeout(
-						(expirationDate.getTime() - new Date().getTime()) / 1000
-					)
-				);
-			}
+			const userId = localStorage.getItem("userId");
+			dispatch(authSuccess(token, userId));
 		}
 	};
 };

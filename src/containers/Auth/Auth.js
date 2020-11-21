@@ -20,7 +20,7 @@ const Auth = () => {
 	const dispatch = useDispatch();
 	const { register, errors, handleSubmit } = useForm();
 
-	const onSubmit = (data) => dispatch(actions.auth(data, isSignup));
+	const onSubmit = (data) => dispatch(actions.auth(data));
 	const switchAuthModeHandler = () => {
 		setIsSignup(!isSignup);
 	};

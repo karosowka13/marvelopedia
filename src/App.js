@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Switch, Redirect, withRouter } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
+import * as actions from "./store/actions/index";
 import Layout from "./hoc/Layout/Layout";
 import Auth from "./containers/Auth/Auth";
 import Logout from "./containers/Auth/Logout/Logout";
@@ -11,6 +12,10 @@ import Card from "./containers/Card/Card";
 import PrivateRoute from "./hoc/PrivateRoute/PrivateRoute";
 
 const App = () => {
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(actions.authCheckState());
+	}, [dispatch]);
 	const isAuthenticated = useSelector((state) => state.auth.token !== null);
 
 	return (
