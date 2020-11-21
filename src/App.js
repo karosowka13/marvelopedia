@@ -24,7 +24,7 @@ class App extends Component {
 							isAuthenticated={this.props.isAuthenticated}
 						/>
 						<Route path="/logout" component={Logout} />
-						<Route path="/:characterName" component={Card} />
+						<Route path="/:id" component={Card} />
 						<Route path="/" exact component={Marvelopedia} />
 						<Redirect to="/" />
 					</Switch>
