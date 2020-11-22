@@ -7,7 +7,14 @@ import _ from "lodash";
 
 import Input from "../../../components/UI/Input/Input";
 const Filter = () => {
-	const [search, setSearch] = useState("");
+	const { inputed, selected } = useSelector(
+		(state) => ({
+			inputed: state.characters.inputed,
+			selected: state.characters.selected,
+		}),
+		shallowEqual
+	);
+	const [search, setSearch] = useState(inputed);
 
 	const yearsOfModifcation = _.range(
 		new Date().getFullYear() - 50,
@@ -16,13 +23,6 @@ const Filter = () => {
 	);
 	const dispatch = useDispatch();
 
-	const { inputed, selected } = useSelector(
-		(state) => ({
-			inputed: state.characters.inputed,
-			selected: state.characters.selected,
-		}),
-		shallowEqual
-	);
 	// eslint-disable-next-line
 	const debouncedSearch = useCallback(
 		_.debounce(

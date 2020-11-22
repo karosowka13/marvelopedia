@@ -10,13 +10,17 @@ const navigationItem = (props) => {
 	} else navLinkClass = classes.NavigationItem;
 	return (
 		<li className={navLinkClass}>
-			<NavLink
-				to={props.link}
-				exact={props.exact}
-				activeClassName={classes.active}
-			>
-				{props.children}
-			</NavLink>
+			{props.elementId ? (
+				<div id={props.elementId}>{props.children}</div>
+			) : (
+				<NavLink
+					to={props.link}
+					exact={props.exact}
+					activeClassName={classes.active}
+				>
+					{props.children}
+				</NavLink>
+			)}
 		</li>
 	);
 };

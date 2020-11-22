@@ -2,21 +2,28 @@ import React from "react";
 
 import classes from "./NavigationItems.module.css";
 import NavigationItem from "./NavigationItem/NavigationItem";
+import useLogout from "../../../hooks/useLogout";
 
-const navigationItems = (props) => (
-	<ul className={classes.NavigationItems}>
-		<NavigationItem link="/" exact>
-			Marvelopedia
-		</NavigationItem>
+const NavigationItems = ({ isAuthenticated }) => {
+	const elementId = "logout";
+	useLogout(elementId);
+	return (
+		<ul className={classes.NavigationItems}>
+			<NavigationItem link="/" exact>
+				Marvelopedia
+			</NavigationItem>
 
-		<NavigationItem link="/favorite">Favourites</NavigationItem>
+			<NavigationItem link="/favorite">Favourites</NavigationItem>
 
-		{!props.isAuthenticated ? (
-			<NavigationItem link="/login">Sign in</NavigationItem>
-		) : (
-			<NavigationItem link="/logout">Logout</NavigationItem>
-		)}
-	</ul>
-);
+			{!isAuthenticated ? (
+				<NavigationItem link="/login">Sign in</NavigationItem>
+			) : (
+				<NavigationItem elementId={elementId} link="/logout">
+					Logout
+				</NavigationItem>
+			)}
+		</ul>
+	);
+};
 
-export default navigationItems;
+export default NavigationItems;

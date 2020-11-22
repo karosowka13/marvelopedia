@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from "react-redux";
 import * as actions from "./store/actions/index";
 import Layout from "./hoc/Layout/Layout";
 import Auth from "./containers/Auth/Auth";
-import Logout from "./containers/Auth/Logout/Logout";
 import Marvelopedia from "./containers/Marvelopedia/Marvelopedia";
 import FavouritesCards from "./containers/FavouritesCards/FavouritesCards";
 import Card from "./containers/Card/Card";
@@ -28,7 +27,6 @@ const App = () => {
 						component={FavouritesCards}
 						isAuthenticated={isAuthenticated}
 					/>
-					<Route path="/logout" component={Logout} />
 					<Route path="/:id" component={Card} />
 					<Route path="/" exact component={Marvelopedia} />
 					<Redirect to="/" />

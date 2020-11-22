@@ -4,8 +4,12 @@
 	display: block;
 	width: 100%;
 }
-
-.NavigationItem a {
+.NavigationItem div {
+	cursor: pointer;
+	color: white;
+}
+.NavigationItem a,
+.NavigationItem div {
 	color: #3e617f;
 	text-decoration: none;
 	width: 45%;
@@ -19,7 +23,8 @@
 
 .NavigationItem a:hover,
 .NavigationItem a:active,
-.NavigationItem a.active {
+.NavigationItem a.active,
+.NavigationItem div:hover {
 	color: #659fb4;
 	border-bottom: 6px solid #072845;
 }
@@ -28,6 +33,7 @@
 	background-color: #ccc;
 	pointer-events: none;
 }
+
 @media (min-width: 500px) {
 	.NavigationItem {
 		margin: 0;
@@ -37,7 +43,8 @@
 		align-items: center;
 	}
 
-	.NavigationItem a {
+	.NavigationItem a,
+	.NavigationItem div {
 		color: white;
 		height: 100%;
 		width: 100%;
@@ -46,7 +53,8 @@
 	}
 	.NavigationItem a:hover,
 	.NavigationItem a:active,
-	.NavigationItem a.active {
+	.NavigationItem a.active,
+	.NavigationItem div:hover {
 		background-color: #659fb4;
 		color: white;
 	}
