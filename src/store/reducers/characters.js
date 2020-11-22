@@ -8,6 +8,7 @@ const initialState = {
 	success: false,
 	inputed: "",
 	selected: "",
+	pageSize: 20,
 };
 
 const fetchCharactersStart = (state, action) => {
@@ -37,6 +38,11 @@ const searchCharacter = (state, action) => {
 		inputed: action.inputedValue,
 	});
 };
+const changePageSize = (state, action) => {
+	return updateObject(state, {
+		pageSize: action.pageSize,
+	});
+};
 
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
@@ -50,6 +56,8 @@ const reducer = (state = initialState, action) => {
 			return selectCharacter(state, action);
 		case actionTypes.SEARCH_CHARACTER:
 			return searchCharacter(state, action);
+		case actionTypes.PAGE_SIZE:
+			return changePageSize(state, action);
 		default:
 			return state;
 	}

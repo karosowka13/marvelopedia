@@ -7,10 +7,12 @@ import _ from "lodash";
 
 import Input from "../../../components/UI/Input/Input";
 const Filter = () => {
-	const { inputed, selected } = useSelector(
+	const pageSizeOptions = [10, 20, 40, 60, 80, 100, 150];
+	const { inputed, selected, pageSize } = useSelector(
 		(state) => ({
 			inputed: state.characters.inputed,
 			selected: state.characters.selected,
+			pageSize: state.characters.pageSize,
 		}),
 		shallowEqual
 	);
@@ -54,11 +56,20 @@ const Filter = () => {
 					label="Modification since"
 					elementType="select"
 					changed={(event) =>
-						dispatch(actions.selectSearchHandler(event, inputed))
+						dispatch(actions.selectSearchHandler(event, inputed, pageSize))
 					}
 					value={selected}
 					elementConfig={{ options: yearsOfModifcation }}
-				></Input>
+				/>{" "}
+				<Input
+					label="Display"
+					elementType="select"
+					value={pageSize}
+					changed={(event) =>
+						dispatch(actions.selectPageSize(event, inputed, selected, pageSize))
+					}
+					elementConfig={{ options: pageSizeOptions }}
+				/>
 			</div>
 		</div>
 	);

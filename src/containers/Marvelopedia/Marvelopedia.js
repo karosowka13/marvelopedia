@@ -55,10 +55,11 @@ const Marvelopedia = () => {
 				buttonLabel="Add to favorites"
 			/>
 		));
-	} else
+	} else if (error) {
 		charactersDisplay = (
 			<p>We are facing some problems, sorry. Come back later.</p>
 		);
+	} else charactersDisplay = <p>No data avaliable</p>;
 
 	return (
 		<React.Fragment>

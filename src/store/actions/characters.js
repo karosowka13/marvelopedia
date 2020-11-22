@@ -22,14 +22,14 @@ export const fetchCharactersStart = () => {
 	};
 };
 
-export const fetchCharacters = (inputed, selected) => {
+export const fetchCharacters = (inputed, selected, pageSize) => {
 	return async (dispatch) => {
 		const formatYear = selected ? new Date(selected) : "";
 		const modificationDate = selected ? formatYear.toISOString() : "";
 
 		const params = {
 			modifiedSince: modificationDate,
-			limit: 50,
+			limit: pageSize,
 			apikey: process.env.REACT_APP_API_PUBLIC_KEY,
 		};
 
@@ -73,4 +73,17 @@ export const inputChangeHandler = (value) => {
 
 export const selectChangeHandler = (value) => {
 	return { type: actionTypes.SELECT_CHARACTER, selectedValue: value };
+};
+
+export const changePageSize = (pageSize) => {
+	const value = pageSize;
+	return { type: actionTypes.PAGE_SIZE, pageSize: value };
+};
+
+export const selectPageSize = (event, inputed, selected) => {
+	const pageSize = event.target.value;
+	return (dispatch) => {
+		dispatch(changePageSize(pageSize));
+		dispatch(fetchCharacters(inputed, selected, pageSize));
+	};
 };

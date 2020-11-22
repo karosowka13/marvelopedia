@@ -50,7 +50,9 @@ const Auth = () => {
 						minLength: 8,
 					})}
 				/>
-				{errors.password && <p>Password is required</p>}
+				{errors.password && (
+					<p>Password needs to have at least 8 characters.</p>
+				)}
 				<Button btnType="Success">SUBMIT</Button>
 			</form>
 		);
