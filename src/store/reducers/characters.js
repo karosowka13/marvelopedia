@@ -1,14 +1,14 @@
 import * as actionTypes from "../actions/actionTypes";
-import { updateObject } from "../../shared/utility";
-
+import { updateObject, withPropTypes } from "../../shared/utility";
+import { CharactersReducerSchema } from "../../shared/constants";
 const initialState = {
 	characters: [],
 	loading: false,
-	error: null,
+	error: false,
 	success: false,
 	inputed: "",
 	selected: "",
-	pageSize: 20,
+	pageSize: "20",
 };
 
 const fetchCharactersStart = (state, action) => {
@@ -24,7 +24,7 @@ const fetchCharactersSuccess = (state, action) => {
 };
 
 const fetchCharactersFail = (state, action) => {
-	return updateObject(state, { loading: false });
+	return updateObject(state, { error: true, loading: false });
 };
 
 const selectCharacter = (state, action) => {
@@ -63,4 +63,7 @@ const reducer = (state = initialState, action) => {
 	}
 };
 
-export default reducer;
+export default withPropTypes(
+	"CharactersReducer",
+	CharactersReducerSchema
+)(reducer);

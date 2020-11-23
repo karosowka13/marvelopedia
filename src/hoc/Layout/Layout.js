@@ -5,7 +5,7 @@ import Toolbar from "../../components/Navigation/Toolbar/Toolbar";
 import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer";
 import PropTypes from "prop-types";
 
-const Layout = (props) => {
+const Layout = ({ children }) => {
 	const [showSideDrawer, setShowSideDrawer] = useState(false);
 	const isAuthenticated = useSelector((state) => state.auth.token !== null);
 
@@ -27,7 +27,7 @@ const Layout = (props) => {
 				open={showSideDrawer}
 				closed={sideDrawerClosedHandler}
 			/>
-			<main className={classes.Content}>{props.children}</main>
+			<main className={classes.Content}>{children}</main>
 		</React.Fragment>
 	);
 };
@@ -35,7 +35,5 @@ const Layout = (props) => {
 export default Layout;
 
 Layout.propTypes = {
-	showSideDrawer: PropTypes.bool,
-	children: PropTypes.node,
-	isAuthenticated: PropTypes.bool,
+	children: PropTypes.node.isRequired,
 };

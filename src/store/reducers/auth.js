@@ -1,10 +1,10 @@
 import * as actionTypes from "../actions/actionTypes";
-import { updateObject } from "../../shared/utility";
-
+import { updateObject, withPropTypes } from "../../shared/utility";
+import { AuthReducerSchema } from "../../shared/constants";
 const initialState = {
 	token: null,
 	userId: null,
-	error: null,
+	error: false,
 	loading: false,
 };
 
@@ -23,7 +23,7 @@ const authSuccess = (state, action) => {
 
 const authFail = (state, action) => {
 	return updateObject(state, {
-		error: action.error,
+		error: true,
 		loading: false,
 	});
 };
@@ -47,4 +47,4 @@ const reducer = (state = initialState, action) => {
 	}
 };
 
-export default reducer;
+export default withPropTypes("AuthReducer", AuthReducerSchema)(reducer);

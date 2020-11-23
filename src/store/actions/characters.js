@@ -1,5 +1,6 @@
 import * as actionTypes from "./actionTypes";
 import axios from "axios";
+
 import { getCharactersData } from "../../shared/utility";
 
 export const fetchCharactersSuccess = (characters) => {
@@ -9,10 +10,9 @@ export const fetchCharactersSuccess = (characters) => {
 	};
 };
 
-export const fetchCharactersFail = (error) => {
+export const fetchCharactersFail = () => {
 	return {
 		type: actionTypes.FETCH_CHARACTERS_FAIL,
-		error: error,
 	};
 };
 
@@ -47,23 +47,22 @@ export const fetchCharacters = (inputed, selected, pageSize) => {
 				dispatch(fetchCharactersSuccess(fetchedCharacters));
 			})
 			.catch((err) => {
-				dispatch(fetchCharactersFail(err));
+				dispatch(fetchCharactersFail());
 			});
 	};
 };
 
-export const inputSearchHandler = (value, selected) => {
+export const inputSearchHandler = (value, selected, pageSize) => {
 	return (dispatch) => {
 		dispatch(inputChangeHandler(value));
-		dispatch(fetchCharacters(value, selected));
+		dispatch(fetchCharacters(value, selected, pageSize));
 	};
 };
 
-export const selectSearchHandler = (event, inputed) => {
-	const selected = event.target.value;
+export const selectSearchHandler = (selected, inputed, pageSize) => {
 	return (dispatch) => {
 		dispatch(selectChangeHandler(selected));
-		dispatch(fetchCharacters(inputed, selected));
+		dispatch(fetchCharacters(inputed, selected, pageSize));
 	};
 };
 
@@ -80,8 +79,7 @@ export const changePageSize = (pageSize) => {
 	return { type: actionTypes.PAGE_SIZE, pageSize: value };
 };
 
-export const selectPageSize = (event, inputed, selected) => {
-	const pageSize = event.target.value;
+export const selectPageSize = (pageSize, inputed, selected) => {
 	return (dispatch) => {
 		dispatch(changePageSize(pageSize));
 		dispatch(fetchCharacters(inputed, selected, pageSize));

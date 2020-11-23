@@ -14,26 +14,26 @@ export const authSuccess = (token, userId) => {
 	};
 };
 
-export const authFail = (error) => {
+export const authFail = () => {
 	return {
 		type: actionTypes.AUTH_FAIL,
-		error: error,
 	};
 };
 
 export const auth = (data) => {
 	return (dispatch) => {
 		dispatch(authStart());
-		const token = Math.random().toString(36).substring(2, 20);
-
-		const authData = {
-			email: data.email,
-			password: data.password,
-			idToken: token,
-		};
-		localStorage.setItem("token", authData.idToken);
-		localStorage.setItem("userId", authData.email);
-		dispatch(authSuccess(authData.idToken, authData.email));
+		if (data) {
+			const token = Math.random().toString(36).substring(2, 20);
+			const authData = {
+				email: data.email,
+				password: data.password,
+				idToken: token,
+			};
+			localStorage.setItem("token", authData.idToken);
+			localStorage.setItem("userId", authData.email);
+			dispatch(authSuccess(authData.idToken, authData.email));
+		} else dispatch(authFail());
 	};
 };
 

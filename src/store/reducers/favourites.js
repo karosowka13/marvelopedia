@@ -1,5 +1,6 @@
 import * as actionTypes from "../actions/actionTypes";
-import { updateObject } from "../../shared/utility";
+import { updateObject, withPropTypes } from "../../shared/utility";
+import { FavouritesReducerSchema } from "../../shared/constants";
 
 const initialState = {
 	charactersFav: [],
@@ -30,4 +31,7 @@ const reducer = (state = initialState, action) => {
 	}
 };
 
-export default reducer;
+export default withPropTypes(
+	"FavouritesReducer",
+	FavouritesReducerSchema
+)(reducer);

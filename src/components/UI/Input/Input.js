@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-
+import { INPUT_TYPES } from "../../../shared/constants";
 import classes from "./Input.module.css";
 
 const input = (props) => {
@@ -29,7 +29,7 @@ const input = (props) => {
 				>
 					{props.elementConfig.options.map((option) => {
 						return (
-							<option key={option} value={option}>
+							<option type="number" key={option} value={option}>
 								{option}
 							</option>
 						);
@@ -59,7 +59,7 @@ const input = (props) => {
 export default input;
 
 input.propTypes = {
-	elementType: PropTypes.oneOf(["input", "select"]),
+	elementType: PropTypes.oneOf(Object.values(INPUT_TYPES)),
 	elementConfig: PropTypes.object,
 	value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	changed: PropTypes.func,

@@ -2,6 +2,7 @@ import React from "react";
 import classes from "./MiniCard.module.css";
 import { Link } from "react-router-dom";
 import Button from "../UI/Button/Button";
+import { BUTTON_TYPES, CharacterSchema } from "../../shared/constants";
 import PropTypes from "prop-types";
 
 const miniCard = ({ character, btnType, clicked, isDisabled, buttonLabel }) => (
@@ -25,11 +26,9 @@ const miniCard = ({ character, btnType, clicked, isDisabled, buttonLabel }) => (
 export default miniCard;
 
 miniCard.propTypes = {
-	character: PropTypes.exact({
-		id: PropTypes.number,
-		name: PropTypes.string,
-		description: PropTypes.string,
-		imgPath: PropTypes.string,
-		comics: PropTypes.array,
-	}),
+	character: PropTypes.exact(CharacterSchema),
+	btnType: PropTypes.oneOf(Object.values(BUTTON_TYPES)),
+	clicked: PropTypes.func,
+	isDisabled: PropTypes.bool,
+	buttonLabel: PropTypes.string,
 };

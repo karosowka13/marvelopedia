@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { BUTTON_TYPES } from "../../../shared/constants";
 
 import classes from "./Button.module.css";
 
@@ -17,7 +18,7 @@ export default button;
 
 button.propTypes = {
 	disabled: PropTypes.bool,
-	btnType: PropTypes.oneOf(["GoTo", "Success", "Danger"]),
+	btnType: PropTypes.oneOf(Object.values(BUTTON_TYPES)),
 	clicked: PropTypes.func,
-	children: PropTypes.string,
+	children: PropTypes.node,
 };

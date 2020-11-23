@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { withRouter, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import PropTypes from "prop-types";
 
 import Spinner from "../../components/UI/Spinner/Spinner";
 import * as actions from "../../store/actions/index";
+import { SUCCESS } from "../../shared/constants";
 import classes from "./Card.module.css";
 import Button from "../../components/UI/Button/Button";
 import { getCharactersData } from "../../shared/utility";
@@ -36,7 +36,6 @@ const Card = () => {
 		};
 		loadCharacter();
 	}, [id]);
-
 	let isReadyCard = null;
 	let comicsList = null;
 	let spinner = null;
@@ -62,7 +61,7 @@ const Card = () => {
 					<ul className={classes.ComicsList}>{comicsList}</ul>
 				</div>
 				<Button
-					btnType="Success"
+					btnType={SUCCESS}
 					clicked={() => dispatch(actions.addCharacter(character))}
 					disabled={
 						favourites.filter((fav) => fav.id === character.id).length > 0
@@ -89,13 +88,3 @@ const Card = () => {
 };
 
 export default withRouter(Card);
-
-Card.propTypes = {
-	match: PropTypes.object.isRequired,
-	charactersData: PropTypes.array,
-	successFetchCharacter: PropTypes.bool,
-	loading: PropTypes.bool,
-	favourites: PropTypes.array,
-	fetchCharacters: PropTypes.func,
-	addToFav: PropTypes.func,
-};

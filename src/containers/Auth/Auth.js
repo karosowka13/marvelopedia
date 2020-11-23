@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
-import PropTypes from "prop-types";
 
 import { useForm } from "react-hook-form";
 
@@ -9,6 +8,7 @@ import Button from "../../components/UI/Button/Button";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import classes from "./Auth.module.css";
 import * as actions from "../../store/actions/index";
+import { GOTO, SUCCESS } from "../../shared/constants";
 
 const Auth = () => {
 	const [isSignup, setIsSignup] = useState(false);
@@ -53,7 +53,7 @@ const Auth = () => {
 				{errors.password && (
 					<p>Password needs to have at least 8 characters.</p>
 				)}
-				<Button btnType="Success">SUBMIT</Button>
+				<Button btnType={SUCCESS}>SUBMIT</Button>
 			</form>
 		);
 	}
@@ -79,7 +79,7 @@ const Auth = () => {
 			{title}
 			{errorMessage}
 			{form}
-			<Button clicked={switchAuthModeHandler} btnType="GoTo">
+			<Button clicked={switchAuthModeHandler} btnType={GOTO}>
 				SWITCH TO {isSignup ? "SIGN IN" : "SIGN UP"}
 			</Button>
 		</div>
@@ -87,9 +87,3 @@ const Auth = () => {
 };
 
 export default Auth;
-
-Auth.propTypes = {
-	email: PropTypes.string,
-	password: PropTypes.string,
-	isSignup: PropTypes.bool,
-};

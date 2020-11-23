@@ -2,12 +2,14 @@ import React, { useCallback, useState } from "react";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import * as actions from "../../../store/actions/index";
 import classes from "./Filter.module.css";
-import PropTypes from "prop-types";
+
 import _ from "lodash";
+import { INPUT, SELECT } from "../../../shared/constants";
 
 import Input from "../../../components/UI/Input/Input";
+
 const Filter = () => {
-	const pageSizeOptions = [10, 20, 40, 60, 80, 100, 150];
+	const pageSizeOptions = [10, 20, 40, 60, 80, 100];
 	const { inputed, selected, pageSize } = useSelector(
 		(state) => ({
 			inputed: state.characters.inputed,
@@ -45,7 +47,7 @@ const Filter = () => {
 		<div className={classes.Filter}>
 			<div className={classes.FilterSearch}>
 				<Input
-					elementType="input"
+					elementType={INPUT}
 					changed={inputSearchHandler}
 					placeholder="Find character"
 					value={search}
@@ -55,19 +57,23 @@ const Filter = () => {
 			<div className={classes.FilterSelect}>
 				<Input
 					label="Since"
-					elementType="select"
+					elementType={SELECT}
 					changed={(event) =>
-						dispatch(actions.selectSearchHandler(event, inputed, pageSize))
+						dispatch(
+							actions.selectSearchHandler(event.target.value, inputed, pageSize)
+						)
 					}
 					value={selected}
 					elementConfig={{ options: allYearsOption }}
 				/>{" "}
 				<Input
 					label="Display"
-					elementType="select"
+					elementType={SELECT}
 					value={pageSize}
 					changed={(event) =>
-						dispatch(actions.selectPageSize(event, inputed, selected, pageSize))
+						dispatch(
+							actions.selectPageSize(event.target.value, inputed, selected)
+						)
 					}
 					elementConfig={{ options: pageSizeOptions }}
 				/>
@@ -77,8 +83,3 @@ const Filter = () => {
 };
 
 export default React.memo(Filter);
-
-Filter.propTypes = {
-	inputed: PropTypes.string,
-	selected: PropTypes.string,
-};
