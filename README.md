@@ -15,7 +15,7 @@ What is more, after siging in, all your favourites characters can be saved! Late
 8. Data presented as cards on a grid
 9. Cards include shortened data from their respective data nodes and navigate to full data view when clicked
 10. Allows users to access respective data nodes views by a URL with a name, e.g. `~/A.I.M.` to access A.I.M. character full data view
-11. Search all resources by name
+11. Search all resources by name with debounce
 12. Filter by the date of notification
 13. Page size option - `"10", "20", "40", "60", "80", "100"` results on the page.
 
