@@ -10,8 +10,6 @@ COPY package-lock.json ./
 
 ENV NODE_ENV production
 ENV GENERATE_SOURCEMAP=false
-ENV REACT_APP_API_PUBLIC_KEY ***
-ENV REACT_APP_API_URL https://gateway.marvel.com/v1/public/characters
 
 RUN npm install
 
