@@ -20,19 +20,22 @@ const Card = () => {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		const loadCharacter = async () => {
+			function onSuccess(res) {
+				const characterFetched = getCharactersData(res.data.data.results);
+				setCharacter(characterFetched[0]);
+				setLoading(false);
+			}
 			let params = {
 				name: id,
 				apikey: process.env.REACT_APP_API_PUBLIC_KEY,
 			};
 			setLoading(true);
-			await axios
-				.get(process.env.REACT_APP_API_URL, { params })
-				.then((res) => {
-					const characterFetched = getCharactersData(res.data.data.results);
-					setCharacter(characterFetched[0]);
-					setLoading(false);
-				})
-				.catch((err) => setError(true));
+			try {
+				const res = await axios.get(process.env.REACT_APP_API_URL, { params });
+				onSuccess(res);
+			} catch (err) {
+				setError(true);
+			}
 		};
 		loadCharacter();
 	}, [id]);

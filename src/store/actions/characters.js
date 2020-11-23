@@ -24,6 +24,11 @@ export const fetchCharactersStart = () => {
 
 export const fetchCharacters = (inputed, selected, pageSize) => {
 	return async (dispatch) => {
+		function onSucces(res) {
+			const results = res.data.data.results;
+			const fetchedCharacters = getCharactersData(results);
+			dispatch(fetchCharactersSuccess(fetchedCharacters));
+		}
 		const formatYear = selected ? new Date(selected) : "";
 		const modificationDate = selected ? formatYear.toISOString() : "";
 
@@ -39,16 +44,12 @@ export const fetchCharacters = (inputed, selected, pageSize) => {
 		}
 		dispatch(fetchCharactersStart());
 
-		await axios
-			.get(process.env.REACT_APP_API_URL, { params })
-			.then((res) => {
-				const results = res.data.data.results;
-				const fetchedCharacters = getCharactersData(results);
-				dispatch(fetchCharactersSuccess(fetchedCharacters));
-			})
-			.catch((err) => {
-				dispatch(fetchCharactersFail());
-			});
+		try {
+			const res = await axios.get(process.env.REACT_APP_API_URL, { params });
+			return onSucces(res);
+		} catch (error) {
+			return dispatch(fetchCharactersFail());
+		}
 	};
 };
 
