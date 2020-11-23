@@ -19,7 +19,7 @@ FROM nginx:1.19.0-alpine
 
 COPY --from=builder /marvelopedia/build /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
-RUN rm -rf docker-entrypoint.d/
+
 
 RUN chown -R nginx:nginx /usr/share/nginx/html && chmod -R 755 /usr/share/nginx/html && \
 chown -R nginx:nginx /var/cache/nginx && \
