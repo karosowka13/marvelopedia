@@ -19,6 +19,7 @@ const Marvelopedia = () => {
 		favourites,
 		inputed,
 		selected,
+		pageSize,
 	} = useSelector(
 		(state) => ({
 			charactersList: state.characters.characters,
@@ -27,14 +28,16 @@ const Marvelopedia = () => {
 			favourites: state.favourites.charactersFav,
 			inputed: state.characters.inputed,
 			selected: state.characters.selected,
+			pageSize: state.characters.pageSize,
 		}),
 		shallowEqual
 	);
 
 	useEffect(() => {
 		const loadCharacters = async () =>
-			dispatch(actions.fetchCharacters(inputed, selected));
+			dispatch(actions.fetchCharacters(inputed, selected, pageSize));
 		loadCharacters();
+		// eslint-disable-next-line
 	}, []);
 
 	let charactersDisplay = null;

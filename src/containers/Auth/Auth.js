@@ -61,7 +61,7 @@ const Auth = () => {
 	let errorMessage = null;
 
 	if (error) {
-		errorMessage = <p>{error.message}</p>;
+		errorMessage = <h2>We are facing some problems. Try again later.</h2>;
 	}
 
 	let authRedirect = null;

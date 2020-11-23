@@ -2,22 +2,20 @@ import React from "react";
 import classes from "./MiniCard.module.css";
 import { Link } from "react-router-dom";
 import Button from "../UI/Button/Button";
-const miniCard = (props) => (
+import PropTypes from "prop-types";
+
+const miniCard = ({ character, btnType, clicked, isDisabled, buttonLabel }) => (
 	<React.Fragment>
-		<li key={props.character.id}>
+		<li key={character.id}>
 			<div className={classes.Character}>
-				<Link to={"/" + props.character.name}>
-					<img src={props.character.imgPath} alt="character_image" />
+				<Link to={"/" + character.name}>
+					<img src={character.imgPath} alt="character_image" />
 					<div className={classes.BackgroundText}>
-						<p>{props.character.name}</p>{" "}
+						<p>{character.name}</p>
 					</div>
 				</Link>
-				<Button
-					btnType={props.btnType}
-					clicked={props.clicked}
-					disabled={props.isDisabled}
-				>
-					{props.buttonLabel}
+				<Button btnType={btnType} clicked={clicked} disabled={isDisabled}>
+					{buttonLabel}
 				</Button>
 			</div>
 		</li>
@@ -25,3 +23,13 @@ const miniCard = (props) => (
 );
 
 export default miniCard;
+
+miniCard.propTypes = {
+	character: PropTypes.exact({
+		id: PropTypes.number,
+		name: PropTypes.string,
+		description: PropTypes.string,
+		imgPath: PropTypes.string,
+		comics: PropTypes.array,
+	}),
+};

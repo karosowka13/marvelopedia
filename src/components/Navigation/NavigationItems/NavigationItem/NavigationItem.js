@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import classes from "./NavigationItem.module.css";
 
@@ -26,3 +27,11 @@ const navigationItem = (props) => {
 };
 
 export default navigationItem;
+
+navigationItem.propTypes = {
+	disabled: PropTypes.bool,
+	elementId: PropTypes.string,
+	link: PropTypes.string,
+	exact: PropTypes.bool,
+	children: PropTypes.string,
+};

@@ -1,17 +1,33 @@
 .Filter {
 	display: flex;
 	justify-content: space-between;
-	padding: 1rem;
-	margin: 1rem;
-	border-bottom: 0.1rem #c0c0c0 solid;
+	padding: 0.5rem;
+	margin: 0.5rem;
 }
 .Filter div {
 	flex: 1 45%;
+}
+
+.FilterSelect {
+	display: flex;
+	flex-flow: row;
 }
 
 @media (max-width: 500px) {
 	.Filter {
 		flex-flow: column;
 		margin-bottom: 23px;
+	}
+}
+@media (max-width: 380px) {
+	.FilterSelect {
+		flex-flow: row;
+	}
+}
+
+@media (max-height: 600px) {
+	.Filter {
+		margin: 0 0.5rem;
+		padding: 0 0.5rem;
 	}
 }

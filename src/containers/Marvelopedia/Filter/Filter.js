@@ -19,10 +19,11 @@ const Filter = () => {
 	const [search, setSearch] = useState(inputed);
 
 	const yearsOfModifcation = _.range(
-		new Date().getFullYear() - 50,
-		new Date().getFullYear() + 5,
-		5
+		new Date().getFullYear() - 15,
+		new Date().getFullYear() + 1,
+		1
 	);
+	const allYearsOption = Array.prototype.concat("", yearsOfModifcation);
 	const dispatch = useDispatch();
 
 	// eslint-disable-next-line
@@ -51,15 +52,15 @@ const Filter = () => {
 					label="Search by name"
 				/>
 			</div>
-			<div className={classes.filterComics}>
+			<div className={classes.FilterSelect}>
 				<Input
-					label="Modification since"
+					label="Since"
 					elementType="select"
 					changed={(event) =>
 						dispatch(actions.selectSearchHandler(event, inputed, pageSize))
 					}
 					value={selected}
-					elementConfig={{ options: yearsOfModifcation }}
+					elementConfig={{ options: allYearsOption }}
 				/>{" "}
 				<Input
 					label="Display"
@@ -75,7 +76,7 @@ const Filter = () => {
 	);
 };
 
-export default Filter;
+export default React.memo(Filter);
 
 Filter.propTypes = {
 	inputed: PropTypes.string,

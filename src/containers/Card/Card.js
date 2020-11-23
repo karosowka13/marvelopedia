@@ -13,6 +13,7 @@ import axios from "axios";
 const Card = () => {
 	const { id } = useParams();
 	const [character, setCharacter] = useState("");
+	const [error, setError] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const favourites = useSelector((state) => state.favourites.charactersFav);
 
@@ -24,11 +25,14 @@ const Card = () => {
 				apikey: process.env.REACT_APP_API_PUBLIC_KEY,
 			};
 			setLoading(true);
-			await axios.get(process.env.REACT_APP_API_URL, { params }).then((res) => {
-				const characterFetched = getCharactersData(res.data.data.results);
-				setCharacter(characterFetched[0]);
-				setLoading(false);
-			});
+			await axios
+				.get(process.env.REACT_APP_API_URL, { params })
+				.then((res) => {
+					const characterFetched = getCharactersData(res.data.data.results);
+					setCharacter(characterFetched[0]);
+					setLoading(false);
+				})
+				.catch((err) => setError(true));
 		};
 		loadCharacter();
 	}, [id]);
@@ -72,6 +76,8 @@ const Card = () => {
 		);
 	} else if (loading) {
 		spinner = <Spinner />;
+	} else if (error) {
+		isReadyCard = <h2>We are facing some problems. Try again.</h2>;
 	} else isReadyCard = <h2>Character not found</h2>;
 
 	return (
